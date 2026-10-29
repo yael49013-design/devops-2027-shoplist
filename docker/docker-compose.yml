@@ -1,0 +1,38 @@
+services:
+  
+  postgress:
+
+
+  backend:
+    build:
+      context: ../app/backend
+    environment:
+      DB_HOST: http://postgress
+      DB_NAME: shoplist
+      DB_USER: shopuser
+      DB_PASSWORD: shoppass
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+
+
+  stats:
+    build:
+      context: ../app/stats
+    environment:
+      BACKEND_URL: http://backend:5000
+     
+    depends_on:
+      - backend
+
+  
+  
+  frontend:
+    build:
+      context: ../app/frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+      - stats
