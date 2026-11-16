@@ -19,7 +19,7 @@ services:
     build:
       context: ../app/backend
     environment:
-      DB_HOST: http://postgress
+      DB_HOST: http://postgres
       DB_NAME: shoplist
       DB_USER: shopuser
       DB_PASSWORD: shoppass
